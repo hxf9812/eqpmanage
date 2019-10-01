@@ -50,4 +50,15 @@ public class User {
     public void setPhone(int phone) {
         this.phone = phone;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", userrank=" + userrank +
+                ", name='" + name + '\'' +
+                ", phone=" + phone +
+                '}';
+    }
 }

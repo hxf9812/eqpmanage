@@ -21,8 +21,6 @@ public class UserController {
 
     @Autowired
     UserServer server=null;
-
-
     /**
      * 用户登录
      * @param u
@@ -32,10 +30,15 @@ public class UserController {
     @ResponseBody
     public User login(@RequestBody User u){
         if(server==null) return null;
+        //用户登录
         User user=server.loginVerify(u.getAccount(),u.getPassword());
         return user;
     }
 
+    /**
+     * 获取所有用户
+     * @return user集合
+     */
     @RequestMapping("/getAllUser")
     @ResponseBody
     public List<User> getAllUser(){
@@ -44,6 +47,11 @@ public class UserController {
         return list;
     }
 
+    /**
+     * 通过id获取user
+     * @param u
+     * @return
+     */
     @RequestMapping("/getUserByAccount")
     @ResponseBody
     public User getUserById(@RequestBody User u){
@@ -52,6 +60,11 @@ public class UserController {
         return user;
     }
 
+    /**
+     *修改用户信息
+     * @param u
+     * @return
+     */
     @RequestMapping("/modifyUserInfo")
     @ResponseBody
     public Result modifyUserInfo(@RequestBody User u){
@@ -65,6 +78,11 @@ public class UserController {
         return r;
     }
 
+    /**
+     * 删除用户通过账号
+     * @param u
+     * @return
+     */
     @RequestMapping("/deleteaUser")
     @ResponseBody
     public Result deleteaUser(@RequestBody User u){
@@ -78,6 +96,11 @@ public class UserController {
         return r;
     }
 
+    /**
+     * 添加用户
+     * @param u
+     * @return
+     */
     @RequestMapping("/addaUser")
     @ResponseBody
     public Result addaUser(@RequestBody User u){
@@ -90,6 +113,12 @@ public class UserController {
         }
         return r;
     }
+
+    /**
+     *
+     * @param u
+     * @return
+     */
     @RequestMapping("/modifyaUser")
     @ResponseBody
     public Result modifyaUser(@RequestBody User u){
