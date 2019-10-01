@@ -21,6 +21,13 @@ public class UserController {
 
     @Autowired
     UserServer server=null;
+
+
+    /**
+     * 用户登录
+     * @param u
+     * @return user对象
+     */
     @RequestMapping("/login")
     @ResponseBody
     public User login(@RequestBody User u){
@@ -28,6 +35,7 @@ public class UserController {
         User user=server.loginVerify(u.getAccount(),u.getPassword());
         return user;
     }
+
     @RequestMapping("/getAllUser")
     @ResponseBody
     public List<User> getAllUser(){
@@ -35,6 +43,7 @@ public class UserController {
         List<User> list=server.getAllUser();
         return list;
     }
+
     @RequestMapping("/getUserByAccount")
     @ResponseBody
     public User getUserById(@RequestBody User u){
@@ -42,6 +51,7 @@ public class UserController {
         User user=server.getUserByAccount(u.getAccount());
         return user;
     }
+
     @RequestMapping("/modifyUserInfo")
     @ResponseBody
     public Result modifyUserInfo(@RequestBody User u){
@@ -54,6 +64,7 @@ public class UserController {
         }
         return r;
     }
+
     @RequestMapping("/deleteaUser")
     @ResponseBody
     public Result deleteaUser(@RequestBody User u){
@@ -66,6 +77,7 @@ public class UserController {
         }
         return r;
     }
+
     @RequestMapping("/addaUser")
     @ResponseBody
     public Result addaUser(@RequestBody User u){
