@@ -34,7 +34,6 @@ public class UserServerImpl implements UserServer {
     @Override
     public User getUserByAccount(String account) {
         if(mapper==null) return null;
-
         User user = mapper.getUserByAccount(account);
         return user;
     }

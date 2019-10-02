@@ -36,9 +36,12 @@ public class EqpServerImpl implements EqpServer {
         //遍历集合设置user对象null
         for (Eqp eqp : allEqp) {
             User master = userServer.getUserByAccount(eqp.getMaster());
-            User user=userServer.getUserByAccount(eqp.getUser());
             eqp.setMasterUser(master);
-            eqp.setUserUser(user);
+            //status为1表示正在被使用，则查询被使用者
+            if (eqp.getStatus()==1){
+                User user=userServer.getUserByAccount(eqp.getUser());
+                eqp.setUserUser(user);
+            }
         }
         return allEqp;
     }
@@ -56,11 +59,7 @@ public class EqpServerImpl implements EqpServer {
         if("".equals(id)||id==null){return false;}
         Eqp eqpById=null;
         //查询出该用户信息
-        try{
-            eqpById = mapper.getEqpById(eqp.getId());
-        }catch (Exception e){
-            return false;
-        }
+        eqpById = mapper.getEqpById(eqp.getId());
         //如果设备不存在表示查询失败
         if (eqpById==null){return false;}
         //补全为null的空缺
@@ -94,11 +93,24 @@ public class EqpServerImpl implements EqpServer {
      */
     @Override
     public Eqp getEqpById(int id) {
+        Eqp eqpById = mapper.getEqpById(id);
+        if (eqpById==null){return null;}
+        return eqpById;
+    }
+    @Override
+    public Eqp getEqpById_WithUser(int id) {
         Eqp eqpById=null;
-        try{
-           eqpById  = mapper.getEqpById(id);
-        }catch (Exception e){
-            return null;
+        //根据id查询用户
+        eqpById  = mapper.getEqpById(id);
+        if (eqpById==null){return null;}
+//        封装负责人和使用者
+        User master = null;
+        master  =  userServer.getUserByAccount(eqpById.getMaster());
+        if (master!=null){   eqpById.setMasterUser(master);}
+        //status为1表示正在被使用，则查询被使用者
+        if (eqpById.getStatus()==1){
+            User user=userServer.getUserByAccount(eqpById.getUser());
+            eqpById.setUserUser(user);
         }
         return eqpById;
     }
@@ -108,22 +120,13 @@ public class EqpServerImpl implements EqpServer {
     public boolean addEqp(Eqp eqp){
         if (mapper==null){return false;}
         //查询管理者是否存在，不存在返回false
-        User userByAccount =null;
-        try{
-           userByAccount= userServer.getUserByAccount(eqp.getMaster());
-        }catch (Exception e){
-            userByAccount=null;
-        }
+        User userByAccount = userServer.getUserByAccount(eqp.getMaster());
         //为空返回false
         if (userByAccount==null){return false;}
         //判断是否添加成功
-        try{
-            if(mapper.addEqp(eqp)>0){
-                return true;
-            }else{
-                return false;
-            }
-        }catch (Exception e){
+        if(mapper.addEqp(eqp)>0){
+            return true;
+        }else{
             return false;
         }
     }
@@ -136,24 +139,16 @@ public class EqpServerImpl implements EqpServer {
         if("".equals(id)||id==null){return false;}
         Eqp eqpById=null;
         //查询出该用户信息
-        try{
-            eqpById = mapper.getEqpById(eqp.getId());
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
+        eqpById = mapper.getEqpById(eqp.getId());
         //如果设备不存在表示查询失败
         if (eqpById==null){return false;}
         //判断是否添加成功
-        try{
-            if(mapper.deleteEqp(eqp)>0){
-                return true;
-            }else{
-                return false;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
+
+        if(mapper.deleteEqp(eqp)>0){
+            return true;
+        }else{
             return false;
         }
+
     }
 }

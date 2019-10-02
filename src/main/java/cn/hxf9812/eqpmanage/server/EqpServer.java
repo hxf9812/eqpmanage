@@ -16,13 +16,19 @@ public interface EqpServer {
      */
     List<Eqp> getAllEqp();
     /**
-     * 修改一个用户根据id
+     * 修改一个设备根据id
      */
     boolean modifyEqp(Eqp eqp);
     /**
      * 根据id查询设备
      */
     Eqp getEqpById(int id);
+    /**
+     * 根据id查询用户和其负责人和使用者
+     * @param id
+     * @return
+     */
+     Eqp getEqpById_WithUser(int id);
     /**
      * 添加一个设备
      */

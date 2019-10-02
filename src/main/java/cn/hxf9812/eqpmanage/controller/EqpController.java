@@ -46,7 +46,7 @@ public class EqpController {
        if ("".equals(id)||id==null){
            return Msg.fail("id不存在").add("eqp",null);
        }
-        Eqp eqpById = eqpServer.getEqpById(eqp.getId());
+        Eqp eqpById = eqpServer.getEqpById_WithUser(eqp.getId());
        if(eqpById==null){
            return Msg.fail("用户不存在").add("eqp",null);
        }else{

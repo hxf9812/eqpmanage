@@ -82,4 +82,16 @@ public class EqpTest {
             System.out.println("删除失败！");
         }
     }
+    @Test
+    public void testGetById(){
+        Eqp eqpById_withUser = eqpServer.getEqpById_WithUser(2);
+        System.out.println(eqpById_withUser);
+        Eqp eqpById = eqpServer.getEqpById(2);
+        System.out.println(eqpById);
+    }
+    @Test
+    public void testGetUserById(){
+        User userByAccount = userServer.getUserByAccount("56441651451");
+        System.out.println(userByAccount);
+    }
 }
