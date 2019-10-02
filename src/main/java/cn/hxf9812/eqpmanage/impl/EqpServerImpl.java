@@ -38,7 +38,7 @@ public class EqpServerImpl implements EqpServer {
             User master = userServer.getUserByAccount(eqp.getMaster());
             eqp.setMasterUser(master);
             //status为1表示正在被使用，则查询被使用者
-            if (eqp.getStatus()==1){
+            if (eqp.getUser()!=null){
                 User user=userServer.getUserByAccount(eqp.getUser());
                 eqp.setUserUser(user);
             }
