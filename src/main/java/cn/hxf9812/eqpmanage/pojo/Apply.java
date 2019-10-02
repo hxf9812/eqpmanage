@@ -21,7 +21,7 @@ public class Apply {
      */
     private int applyeqp;
     /**
-     * 是否被处理
+     * 处理结果
      */
     private int isdealed;
     /**
@@ -103,17 +103,5 @@ public class Apply {
         this.applyedUser = applyedUser;
     }
 
-    @Override
-    public String toString() {
-        return "Apply{" +
-                "id=" + id +
-                ", whoapply='" + whoapply + '\'' +
-                ", whoapplyed='" + whoapplyed + '\'' +
-                ", applyeqp=" + applyeqp +
-                ", isdealed=" + isdealed +
-                ", applyUser=" + applyUser +
-                ", applyedUser=" + applyedUser +
-                ", applyedEqp=" + applyedEqp +
-                '}';
-    }
+
 }

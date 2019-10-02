@@ -21,4 +21,18 @@ public interface ApplyToUseServer {
      * @return List<Apply>
      */
     List<Apply> getAllApplyForWhoapply(Apply apply);
+
+    /**
+     * 根据处理人账号，查询所有请求
+     * @param apply
+     * @return
+     */
+    List<Apply> getAllApplyForWhoapplyed(Apply apply);
+
+    /**
+     * 修改是否成功
+     * @param apply
+     * @return
+     */
+    boolean setIsdealed(Apply apply);
 }
