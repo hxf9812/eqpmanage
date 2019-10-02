@@ -46,7 +46,7 @@ public class EqpTest {
     }
     @Test
     public void testgetEqpById(){
-        Eqp eqpById = eqpServer.getEqpById(2);
+        Eqp eqpById = eqpServer.getEqpById(1);
         System.out.println(eqpById);
     }
     @Test
@@ -84,9 +84,9 @@ public class EqpTest {
     }
     @Test
     public void testGetById(){
-        Eqp eqpById_withUser = eqpServer.getEqpById_WithUser(2);
+        Eqp eqpById_withUser = eqpServer.getEqpById_WithUser(4);
         System.out.println(eqpById_withUser);
-        Eqp eqpById = eqpServer.getEqpById(2);
+        Eqp eqpById = eqpServer.getEqpById(4);
         System.out.println(eqpById);
     }
     @Test

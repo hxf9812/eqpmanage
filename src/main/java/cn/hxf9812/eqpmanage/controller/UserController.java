@@ -4,12 +4,14 @@ import cn.hxf9812.eqpmanage.pojo.Result;
 import cn.hxf9812.eqpmanage.pojo.User;
 import cn.hxf9812.eqpmanage.server.UserServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Set;
 
@@ -28,10 +30,11 @@ public class UserController {
      */
     @RequestMapping("/login")
     @ResponseBody
-    public User login(@RequestBody User u){
+    public User login(HttpSession session, @RequestBody User u){
         if(server==null) return null;
         //用户登录
         User user=server.loginVerify(u.getAccount(),u.getPassword());
+        session.setAttribute("user",user);
         return user;
     }
 
