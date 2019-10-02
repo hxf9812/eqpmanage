@@ -37,10 +37,12 @@ public class EqpServerImpl implements EqpServer {
         for (Eqp eqp : allEqp) {
             User master = userServer.getUserByAccount(eqp.getMaster());
             eqp.setMasterUser(master);
-            //status为1表示正在被使用，则查询被使用者
-            if (eqp.getStatus()==1){
+           //如果用户不为空就获取useruser
+            if(eqp.getUser()!=null){
                 User user=userServer.getUserByAccount(eqp.getUser());
-                eqp.setUserUser(user);
+                if(user!=null){
+                    eqp.setUserUser(user);
+                }
             }
         }
         return allEqp;
@@ -104,13 +106,20 @@ public class EqpServerImpl implements EqpServer {
         eqpById  = mapper.getEqpById(id);
         if (eqpById==null){return null;}
 //        封装负责人和使用者
-        User master = null;
-        master  =  userServer.getUserByAccount(eqpById.getMaster());
+        //查询负责人
+        User master  =  userServer.getUserByAccount(eqpById.getMaster());
         if (master!=null){   eqpById.setMasterUser(master);}
-        //status为1表示正在被使用，则查询被使用者
-        if (eqpById.getStatus()==1){
+        //判断使用者是否存在
+        if (eqpById.getUser()==null){
+            eqpById.setStatus(0);
+        }else{
             User user=userServer.getUserByAccount(eqpById.getUser());
-            eqpById.setUserUser(user);
+            if (user==null){
+                eqpById.setStatus(0);
+            }else{
+                eqpById.setStatus(1);
+                eqpById.setUserUser(user);
+            }
         }
         return eqpById;
     }
@@ -143,7 +152,6 @@ public class EqpServerImpl implements EqpServer {
         //如果设备不存在表示查询失败
         if (eqpById==null){return false;}
         //判断是否添加成功
-
         if(mapper.deleteEqp(eqp)>0){
             return true;
         }else{
