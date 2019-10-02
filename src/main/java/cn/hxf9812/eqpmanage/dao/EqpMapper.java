@@ -31,4 +31,10 @@ public interface EqpMapper {
     @Insert("insert into eqp(master,indate,user,status,belong) values(#{master},#{indate},#{user},#{status},#{belong})")
     int addEqp(Eqp eqp);
 
+    /**
+     *根绝id删除一个设备
+     */
+    @Delete("Delete from eqp where id = #{id}")
+    int deleteEqp(Eqp eqp);
+
 }

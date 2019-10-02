@@ -51,6 +51,9 @@ public class EqpServerImpl implements EqpServer {
     @Override
     public boolean modifyEqp(Eqp eqp) {
         if (mapper==null){return false;}
+        //如果id不存在表示查询失败
+        String id=""+eqp.getId();
+        if("".equals(id)||id==null){return false;}
         Eqp eqpById=null;
         //查询出该用户信息
         try{
@@ -58,8 +61,8 @@ public class EqpServerImpl implements EqpServer {
         }catch (Exception e){
             return false;
         }
+        //如果设备不存在表示查询失败
         if (eqpById==null){return false;}
-        System.out.println(eqpById);
         //补全为null的空缺
         if(eqp.getMaster()==null){
             eqp.setMaster(eqpById.getMaster());
@@ -91,7 +94,12 @@ public class EqpServerImpl implements EqpServer {
      */
     @Override
     public Eqp getEqpById(int id) {
-        Eqp eqpById = mapper.getEqpById(id);
+        Eqp eqpById=null;
+        try{
+           eqpById  = mapper.getEqpById(id);
+        }catch (Exception e){
+            return null;
+        }
         return eqpById;
     }
     /**
@@ -99,19 +107,46 @@ public class EqpServerImpl implements EqpServer {
      */
     public boolean addEqp(Eqp eqp){
         if (mapper==null){return false;}
-        //查询管理者是否存在，不存在返回异常
+        //查询管理者是否存在，不存在返回false
         User userByAccount =null;
         try{
            userByAccount= userServer.getUserByAccount(eqp.getMaster());
         }catch (Exception e){
-            e.printStackTrace();
             userByAccount=null;
         }
         //为空返回false
         if (userByAccount==null){return false;}
-        //贩毒案是否添加成功
+        //判断是否添加成功
         try{
             if(mapper.addEqp(eqp)>0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteEqp(Eqp eqp) {
+        if (mapper==null){return false;}
+        //如果id不存在表示查询失败
+        String id=""+eqp.getId();
+        if("".equals(id)||id==null){return false;}
+        Eqp eqpById=null;
+        //查询出该用户信息
+        try{
+            eqpById = mapper.getEqpById(eqp.getId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        //如果设备不存在表示查询失败
+        if (eqpById==null){return false;}
+        //判断是否添加成功
+        try{
+            if(mapper.deleteEqp(eqp)>0){
                 return true;
             }else{
                 return false;

@@ -53,7 +53,7 @@ public class EqpTest {
     public void testUpadte(){
         Eqp eqp=new Eqp();
         eqp.setId(2);
-        eqp.setStatus(1);
+        eqp.setBelong("java实验室");
         System.out.println(eqpServer.modifyEqp(eqp));
     }
     @Test
@@ -65,5 +65,21 @@ public class EqpTest {
         eqp.setStatus(0);
         eqp.setBelong("网络工程实验室");
         System.out.println(eqpServer.addEqp(eqp));
+    }
+    @Test
+    public void testDelete(){
+        Eqp eqp =new Eqp();
+        eqp.setId(2);
+        if (eqpServer.deleteEqp(eqp)){
+            System.out.println("删除成功！");
+        }else{
+            System.out.println("删除失败！");
+        }
+        eqp.setId(10);
+        if (eqpServer.deleteEqp(eqp)){
+            System.out.println("删除成功！");
+        }else{
+            System.out.println("删除失败！");
+        }
     }
 }

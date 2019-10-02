@@ -2,6 +2,7 @@ package cn.hxf9812.eqpmanage.server;
 
 import cn.hxf9812.eqpmanage.pojo.Eqp;
 import cn.hxf9812.eqpmanage.pojo.User;
+import org.apache.ibatis.annotations.Delete;
 
 import java.util.List;
 
@@ -26,4 +27,8 @@ public interface EqpServer {
      * 添加一个设备
      */
     public boolean addEqp(Eqp eqp);
+    /**
+     *根绝id删除一个设备
+     */
+    boolean deleteEqp(Eqp eqp);
 }

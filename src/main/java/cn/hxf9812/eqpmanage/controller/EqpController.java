@@ -25,15 +25,33 @@ public class EqpController {
      * 获取所有数据
      * @return
      */
-    @RequestMapping("/getAlleqp")
+    @RequestMapping("/getAllEqp")
     @ResponseBody
     public Msg getAlleqp(){
         List<Eqp> allEqp = eqpServer.getAllEqp();
         if (allEqp!=null){
-           return Msg.success().add("EqpList",allEqp);
+           return Msg.success().add("eqpList",allEqp);
         }else{
-           return Msg.fail().add("EqpList",null);
+           return Msg.fail().add("eqpList",null);
         }
+    }
+    /**
+     * 获取所有数据
+     * @return
+     */
+    @RequestMapping("/getEqpById")
+    @ResponseBody
+    public Msg getEqpById(@RequestBody Eqp eqp){
+        String id =""+eqp.getId();
+       if ("".equals(id)||id==null){
+           return Msg.fail("id不存在").add("eqp",null);
+       }
+        Eqp eqpById = eqpServer.getEqpById(eqp.getId());
+       if(eqpById==null){
+           return Msg.fail("用户不存在").add("eqp",null);
+       }else{
+           return Msg.success().add("eqp",eqpById);
+       }
     }
 
     /**
@@ -54,7 +72,7 @@ public class EqpController {
     /**
      * 添加设备
      */
-    @RequestMapping("/addaeqp")
+    @RequestMapping("/addEqp")
     @ResponseBody
     public Msg addEqp (@RequestBody Eqp eqp){
         boolean b = eqpServer.addEqp(eqp);
@@ -62,6 +80,22 @@ public class EqpController {
             return Msg.success("添加成功！");
         }else{
             return Msg.fail("添加失败！原因可能是您所填写的管理员并不存在！");
+        }
+    }
+
+    /**
+     * 根据id删除一个设备
+     * @param eqp
+     * @return
+     */
+    @RequestMapping("/deleteEqp")
+    @ResponseBody
+    public Msg deleteEqp (@RequestBody Eqp eqp){
+        boolean b = eqpServer.deleteEqp(eqp);
+        if (b){
+            return Msg.success("添加成功！");
+        }else{
+            return Msg.fail("添加失败！原因可能是id并不存在！");
         }
     }
 }
