@@ -72,7 +72,7 @@ public interface ApplyToUseMapper {
     List<Apply> getAllApplyForWhoapplyed(Apply apply);
 
     /**
-     * 处理
+     * 修改
      * @return
      */
     @Update("update apply set isdealed = #{isdealed} where id=#{id}")

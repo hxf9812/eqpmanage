@@ -30,6 +30,9 @@ public class ApplyToUseController {
     @RequestMapping("/applyaEqp")
     @ResponseBody
     public Msg addApply(@RequestBody Apply apply, HttpSession session){
+        /**
+         * 除了user中的参数，其他都要
+         */
         User user = (User)session.getAttribute("user");
         apply.setWhoapply(user.getAccount());
         if(aserver.addApply(apply)){
@@ -42,6 +45,9 @@ public class ApplyToUseController {
     @RequestMapping("/getAllApplyByWhoApply")
     @ResponseBody
     public Msg getAllApplyByWhoApply(@RequestBody Apply apply, HttpSession session){
+        /*
+         * 需要申请者账号whoapply:Apply whoapply参数
+         */
         /**
          * 获取用户帐号
          */
@@ -59,6 +65,9 @@ public class ApplyToUseController {
     @RequestMapping("/getAllApplyByWhoApplyed")
     @ResponseBody
     public Msg getAllApplyByWhoApplyed(@RequestBody Apply apply, HttpSession session){
+        /*
+        * 需要被申请者账号:Apply whoapplyed参数
+        * */
         /**
          * 获取管理员帐号
          */
@@ -75,7 +84,12 @@ public class ApplyToUseController {
     }
     @RequestMapping("/modifyIsdealed")
     @ResponseBody
-    public Msg modifyIsdealed(@RequestBody Apply apply, HttpSession session){
+    public Msg modifyIsdealed(@RequestBody Apply apply){
+        /**
+         * 需要请求apply对象的id:  Apply Id参数
+         * 需要请求前端选择的结果: Apply isdealed参数
+         * 需要所处理的设备id：Apply  applyeqp参数
+         */
         if(aserver.setIsdealed(apply)){
             return Msg.success();
         }else{
