@@ -44,7 +44,7 @@ public class ApplyTest {
     @Test
     public void testSetIsdealed(){
         Apply apply=new Apply();
-        apply.setId(2);
+        apply.setId(8);
         apply.setWhoapply("1353328145");
         apply.setIsdealed(2);
         apply.setApplyeqp(1);

@@ -103,5 +103,17 @@ public class Apply {
         this.applyedUser = applyedUser;
     }
 
-
+    @Override
+    public String toString() {
+        return "Apply{" +
+                "id=" + id +
+                ", whoapply='" + whoapply + '\'' +
+                ", whoapplyed='" + whoapplyed + '\'' +
+                ", applyeqp=" + applyeqp +
+                ", isdealed=" + isdealed +
+                ", applyUser=" + applyUser +
+                ", applyedUser=" + applyedUser +
+                ", applyedEqp=" + applyedEqp +
+                '}';
+    }
 }
