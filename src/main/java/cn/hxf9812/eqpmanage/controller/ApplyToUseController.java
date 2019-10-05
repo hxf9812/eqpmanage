@@ -4,6 +4,7 @@ import cn.hxf9812.eqpmanage.pojo.Apply;
 import cn.hxf9812.eqpmanage.pojo.Msg;
 import cn.hxf9812.eqpmanage.pojo.User;
 import cn.hxf9812.eqpmanage.server.ApplyToUseServer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,9 +48,11 @@ public class ApplyToUseController {
         /**
          * 获取用户帐号
          */
-        User user = (User)session.getAttribute("user");
+//        User user = (User)session.getAttribute("user");
         //设置账号
-        apply.setWhoapply(user.getAccount());
+//        apply.setWhoapply(user.getAccount());
+        //通过前端获取用户账号，并传递过来
+
         //查询
         List<Apply> list = aserver.getAllApplyForWhoapply(apply);
         if(list==null){

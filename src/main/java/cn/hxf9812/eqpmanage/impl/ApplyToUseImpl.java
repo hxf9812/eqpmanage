@@ -7,6 +7,7 @@ import cn.hxf9812.eqpmanage.pojo.Eqp;
 import cn.hxf9812.eqpmanage.pojo.Msg;
 import cn.hxf9812.eqpmanage.server.ApplyToUseServer;
 import cn.hxf9812.eqpmanage.server.EqpServer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

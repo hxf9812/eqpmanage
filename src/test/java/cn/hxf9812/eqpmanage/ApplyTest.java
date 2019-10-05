@@ -57,7 +57,7 @@ public class ApplyTest {
     @Test
     public void testSelectForwhoapply(){
         Apply apply=new Apply();
-        apply.setWhoapply("1353328145");
+        apply.setWhoapply("666");
         List<Apply> all = aServer.getAllApplyForWhoapply(apply);
         if (all==null){
             System.out.println("集合为空");

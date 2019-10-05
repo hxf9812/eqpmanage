@@ -1,8 +1,11 @@
 package cn.hxf9812.eqpmanage.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * 这是一个申请实体类
  */
+@JsonIgnoreProperties(value = {"handler"})
 public class Apply {
     /**
      * 请求编码

@@ -6,12 +6,15 @@ user使用者（用户）
 status(当前状态)
 belong从属实验室*/
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 import java.util.List;
 
 /**
  * 这是一个实验室设备实体类
  */
+@JsonIgnoreProperties(value = {"handler"})
 public class Eqp {
     /**
      * 编号

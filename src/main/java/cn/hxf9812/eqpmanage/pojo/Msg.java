@@ -1,11 +1,14 @@
 package cn.hxf9812.eqpmanage.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 这是一个
  */
+@JsonIgnoreProperties(value = {"handler"})
 public class Msg {
     /**
      * 数据对象

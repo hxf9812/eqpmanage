@@ -1,6 +1,8 @@
 package cn.hxf9812.eqpmanage.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(value = {"handler"})
 public class User {
     private String account;
     private String password;
