@@ -33,8 +33,6 @@ public class ApplyToUseController {
         /**
          * 除了user中的参数，其他都要
          */
-        User user = (User)session.getAttribute("user");
-        apply.setWhoapply(user.getAccount());
         if(aserver.addApply(apply)){
            return Msg.success();
         }else{

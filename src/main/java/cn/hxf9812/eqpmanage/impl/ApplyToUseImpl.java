@@ -42,19 +42,11 @@ public class ApplyToUseImpl implements ApplyToUseServer {
             //设备不存在，添加失败
             return false;
         }else{
-            //设备存在
-            //判断设备是否空闲
-            if (eqp.getStatus()==0){
-                //设备空闲，发送申请
                 if(ampper.addApply(apply)>0){
                     return true;
                 }else{
                     return false;
                 }
-            }else{
-                //设备不空闲,添加失败
-                return false;
-            }
         }
     }
 
