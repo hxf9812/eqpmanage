@@ -30,9 +30,7 @@ public class ApplyToUseController {
     @RequestMapping("/applyaEqp")
     @ResponseBody
     public Msg addApply(@RequestBody Apply apply, HttpSession session){
-        /**
-         * 除了user中的参数，其他都要
-         */
+
         if(aserver.addApply(apply)){
            return Msg.success();
         }else{
