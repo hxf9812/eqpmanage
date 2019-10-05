@@ -45,9 +45,9 @@ public class ApplyTest {
     public void testSetIsdealed(){
         Apply apply=new Apply();
         apply.setId(8);
-        apply.setWhoapply("1353328145");
-        apply.setIsdealed(2);
-        apply.setApplyeqp(1);
+        apply.setWhoapply("1353328145");//申请人
+        apply.setIsdealed(1);//同意
+        apply.setApplyeqp(1);//申请的设备
         System.out.println(aServer.setIsdealed(apply));
     }
 

@@ -88,6 +88,9 @@ public class ApplyToUseImpl implements ApplyToUseServer {
         if("".equals(applyeqp)||applyeqp==null){
             return false;
         }
+        /**
+         * 根据
+         */
         Eqp eqp = eqpServer.getEqpById(apply.getApplyeqp());
         if(eqp==null) {
             //设备不存在，处理失败
@@ -96,12 +99,12 @@ public class ApplyToUseImpl implements ApplyToUseServer {
         }else{
             //设备存在，修改设备的状态码
             if(apply.getIsdealed()==1){
-                //同意使用，把机器改为繁忙
-                eqp.setStatus(1);
-                eqp.setUser(apply.getWhoapply());
-                eqpMapper.modifyUser(eqp);
                 //修改请求结果
                 if(ampper.modifyApply(apply)>0){
+                    //同意使用，把机器改为繁忙
+                    eqp.setUser(apply.getWhoapply());
+                    eqpMapper.modifyUser(eqp);
+
                     return true;
                 }else{
                     return false;
