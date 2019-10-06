@@ -75,4 +75,13 @@ public class Msg {
         this.getExtend().put(key,values);
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Msg{" +
+                "extend=" + extend +
+                ", flag=" + flag +
+                ", msg='" + msg + '\'' +
+                '}';
+    }
 }

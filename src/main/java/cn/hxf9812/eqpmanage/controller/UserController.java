@@ -1,5 +1,6 @@
 package cn.hxf9812.eqpmanage.controller;
 
+import cn.hxf9812.eqpmanage.pojo.Msg;
 import cn.hxf9812.eqpmanage.pojo.Result;
 import cn.hxf9812.eqpmanage.pojo.User;
 import cn.hxf9812.eqpmanage.server.UserServer;
@@ -117,6 +118,17 @@ public class UserController {
         return r;
     }
 
+    /**
+     * 注册方法
+     * @param u
+     * @return
+     */
+    @RequestMapping("/register")
+    @ResponseBody
+    public Msg register(@RequestBody User u){
+        Msg register = server.register(u);
+        return register;
+    }
     /**
      *
      * @param u

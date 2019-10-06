@@ -8,7 +8,7 @@ public class User {
     private String password;
     private int userrank;
     private String name;
-    private int phone;
+    private String phone;
 
     public User() {
     }
@@ -45,11 +45,11 @@ public class User {
         this.name = name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -60,7 +60,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", userrank=" + userrank +
                 ", name='" + name + '\'' +
-                ", phone=" + phone +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }
