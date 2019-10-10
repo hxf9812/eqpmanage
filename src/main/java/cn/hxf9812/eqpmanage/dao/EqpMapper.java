@@ -37,4 +37,12 @@ public interface EqpMapper {
     @Delete("Delete from eqp where id = #{id}")
     int deleteEqp(Eqp eqp);
 
+    /**
+     * author: hxf
+     * 检索使用者当前正在使用的设备
+     * @param user
+     * @return
+     */
+    @Select("select * from eqp where user= #{user}")
+    List<Eqp> getEqpByUser(String user);
 }

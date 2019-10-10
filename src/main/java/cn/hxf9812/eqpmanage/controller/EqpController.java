@@ -98,4 +98,21 @@ public class EqpController {
             return Msg.fail("添加失败！原因可能是id并不存在！");
         }
     }
+
+    /**
+     * author hxf
+     * 检索用户正在使用的设备
+     * @param eqp
+     * @return
+     */
+    @RequestMapping("/getEqpByUser")
+    @ResponseBody
+    public Msg getEqpByUser(@RequestBody Eqp eqp){
+        List<Eqp> list = eqpServer.getEqpByUser(eqp.getUser());
+        if(list!=null) {
+            return Msg.success().add("eqp",list);
+        }
+        else return Msg.fail("未找到任何设备");
+    }
+
 }

@@ -39,7 +39,7 @@ public class UserServerImpl implements UserServer {
     }
 
     @Override
-    public boolean modifyUserInfo( String password, String name, String phone,String account) {
+    public boolean modifyUserInfo(String password, String name, String phone,String account) {
         if(mapper==null) return false;
 
         if(mapper.modifyUserInfo(password,name,phone,account)>0){
