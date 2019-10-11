@@ -1,13 +1,12 @@
 package cn.hxf9812.eqpmanage.dao;
 
-import cn.hxf9812.eqpmanage.pojo.Apply;
 import cn.hxf9812.eqpmanage.pojo.Eqp;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 /**
- * 这是一个实验室设备操作类
+ * 这是一个实验室设备类
  */
 public interface EqpMapper {
     /**
@@ -45,4 +44,12 @@ public interface EqpMapper {
     @Update("update eqp set user = null where id=#{id}")
     int returnEqp(int id);
 
+    /**
+     * author: hxf
+     * 检索使用者当前正在使用的设备
+     * @param user
+     * @return
+     */
+    @Select("select * from eqp where user= #{user}")
+    List<Eqp> getEqpByUser(String user);
 }

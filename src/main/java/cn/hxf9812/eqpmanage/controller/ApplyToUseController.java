@@ -69,9 +69,9 @@ public class ApplyToUseController {
         /**
          * 获取管理员帐号
          */
-        User user = (User)session.getAttribute("user");
+//        User user = (User)session.getAttribute("user");
         //设置账号
-        apply.setWhoapplyed(user.getAccount());
+//        apply.setWhoapplyed(user.getAccount());
         //查询
         List<Apply> list = aserver.getAllApplyForWhoapplyed(apply);
         if(list==null){

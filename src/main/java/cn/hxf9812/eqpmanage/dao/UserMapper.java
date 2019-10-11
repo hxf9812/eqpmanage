@@ -17,7 +17,7 @@ public interface UserMapper {
     @Select("select * from user where account = #{account}")
     User getUserByAccount(String account);
 
-    @Update("upe=#date user set password=#{password},nam{name},phone=#{phone} where account=#{account} ")
+    @Update("update user set password=#{password},name=#{name},phone=#{phone} where account=#{account} ")
     int modifyUserInfo(String password,String name,String phone,String account);
 
     @Select("select * from user")

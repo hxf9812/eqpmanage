@@ -157,4 +157,16 @@ public class EqpServerImpl implements EqpServer {
         }
 
     }
+
+    @Override
+    public List<Eqp> getEqpByUser(String user) {
+        if (mapper==null){return null;}
+        if(user.equals("") || user==null){return null;}
+        List<Eqp> list=mapper.getEqpByUser(user);
+        for(Eqp eqp : list){
+            User master=userServer.getUserByAccount(eqp.getMaster());
+            eqp.setMasterUser(master);
+        }
+        return list;
+    }
 }

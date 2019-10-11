@@ -37,4 +37,11 @@ public interface EqpServer {
      *根绝id删除一个设备
      */
     boolean deleteEqp(Eqp eqp);
+
+    /**
+     * author hxf
+     * @param user
+     * @return
+     */
+    List<Eqp> getEqpByUser(String user);
 }
