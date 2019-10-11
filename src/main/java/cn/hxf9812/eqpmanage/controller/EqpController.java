@@ -115,4 +115,17 @@ public class EqpController {
         else return Msg.fail("未找到任何设备");
     }
 
+    /**
+     * author hxf
+     * 用户归还设备
+     * @param eqp
+     * @return
+     */
+    @RequestMapping("/returnEqp")
+    @ResponseBody
+    public Msg returnEqp(@RequestBody Eqp eqp){
+        if(eqpServer.returnEqp(eqp.getId()))
+            return Msg.success();
+        else return Msg.fail();
+    }
 }

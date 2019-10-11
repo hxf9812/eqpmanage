@@ -42,4 +42,9 @@ public interface ApplyToUseServer {
      * @param apply_id
      */
     void returnEqp(int eqp_id,int apply_id);
+
+    /**
+     *  清除一条申请记录
+     */
+    boolean deleteApplyById(int id);
 }

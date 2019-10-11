@@ -169,4 +169,13 @@ public class EqpServerImpl implements EqpServer {
         }
         return list;
     }
+    /**
+     * 归还设备
+     */
+    @Override
+    public boolean returnEqp(int id) {
+        if (mapper==null){return false;}
+        if(mapper.returnEqp(id)>0) return true;
+        else return false;
+    }
 }

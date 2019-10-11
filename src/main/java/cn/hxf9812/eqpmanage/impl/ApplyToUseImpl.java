@@ -128,4 +128,13 @@ public class ApplyToUseImpl implements ApplyToUseServer {
 //       scheduledExecutorService.schedule(new ReturnEqp(),10,TimeUnit.SECONDS);
 //       scheduledExecutorService.shutdown();
     }
+
+    @Override
+    public boolean deleteApplyById(int id) {
+
+        if(ampper.deleteApplyById(id)>0)
+            return true;
+        else return false;
+
+    }
 }
