@@ -4,7 +4,6 @@ import cn.hxf9812.eqpmanage.pojo.Apply;
 import cn.hxf9812.eqpmanage.pojo.Msg;
 import cn.hxf9812.eqpmanage.pojo.User;
 import cn.hxf9812.eqpmanage.server.ApplyToUseServer;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -81,6 +80,8 @@ public class ApplyToUseController {
             return  Msg.success().add("ApplysByMaster",list);
         }
     }
+
+
     @RequestMapping("/modifyIsdealed")
     @ResponseBody
     public Msg modifyIsdealed(@RequestBody Apply apply){
@@ -89,10 +90,11 @@ public class ApplyToUseController {
          * 需要请求前端选择的结果: Apply isdealed参数
          * 需要所处理的设备id：Apply  applyeqp参数
          */
-        if(aserver.setIsdealed(apply)){
-            return Msg.success();
-        }else{
-            return Msg.fail();
-        }
+//        if(aserver.setIsdealed(apply)){
+//            return Msg.success();
+//        }else{
+//            return Msg.fail();
+//        }
+        return aserver.setIsdealed(apply);
     }
 }

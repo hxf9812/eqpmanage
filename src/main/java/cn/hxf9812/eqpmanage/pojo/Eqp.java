@@ -34,7 +34,7 @@ public class Eqp {
     private String user;
     /**
      * 当前使用状态
-     * 0表示未被使用，1表示正在被使用
+     * 0表示健康，1表示不健康
      */
     private int status;
     /**

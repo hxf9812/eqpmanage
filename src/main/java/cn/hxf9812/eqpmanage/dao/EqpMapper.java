@@ -1,12 +1,13 @@
 package cn.hxf9812.eqpmanage.dao;
 
+import cn.hxf9812.eqpmanage.pojo.Apply;
 import cn.hxf9812.eqpmanage.pojo.Eqp;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 /**
- * 这是一个实验室设备类
+ * 这是一个实验室设备操作类
  */
 public interface EqpMapper {
     /**
@@ -36,5 +37,12 @@ public interface EqpMapper {
      */
     @Delete("Delete from eqp where id = #{id}")
     int deleteEqp(Eqp eqp);
+
+    /**
+     * 归还一个设备
+     * @return
+     */
+    @Update("update eqp set user = null where id=#{id}")
+    int returnEqp(int id);
 
 }

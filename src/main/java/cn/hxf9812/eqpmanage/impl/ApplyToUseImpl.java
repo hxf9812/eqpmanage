@@ -7,10 +7,8 @@ import cn.hxf9812.eqpmanage.pojo.Eqp;
 import cn.hxf9812.eqpmanage.pojo.Msg;
 import cn.hxf9812.eqpmanage.server.ApplyToUseServer;
 import cn.hxf9812.eqpmanage.server.EqpServer;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 
@@ -74,19 +72,20 @@ public class ApplyToUseImpl implements ApplyToUseServer {
     }
 
     @Override
-    public boolean setIsdealed(Apply apply) {
+    public Msg setIsdealed(Apply apply) {
         //判断必须的参数是否为空
         String id = apply.getId()+"";
         if("".equals(id)||id==null){
-            return false;
+
+            return Msg.fail("被需要的参数为空");
         }
         String isdealed = apply.getIsdealed()+"";
         if("".equals(isdealed)||isdealed==null){
-            return false;
+            return Msg.fail("被需要的参数为空");
         }
         String applyeqp = apply.getApplyeqp()+"";
         if("".equals(applyeqp)||applyeqp==null){
-            return false;
+            return Msg.fail("被需要的参数为空");
         }
         /**
          * 根据
@@ -94,7 +93,7 @@ public class ApplyToUseImpl implements ApplyToUseServer {
         Eqp eqp = eqpServer.getEqpById(apply.getApplyeqp());
         if(eqp==null) {
             //设备不存在，处理失败
-            return false;
+            return Msg.fail("设备不存在，处理失败！");
         }else{
             //设备存在，修改设备的状态码
             if(apply.getIsdealed()==1){
@@ -103,19 +102,30 @@ public class ApplyToUseImpl implements ApplyToUseServer {
                     //同意使用，把机器改为繁忙
                     eqp.setUser(apply.getWhoapply());
                     eqpMapper.modifyUser(eqp);
-                    return true;
+                    return Msg.success("同意申请成功！");
                 }else{
-                    return false;
+                    return Msg.fail("同意申请失败！");
                 }
             }else{
                 //不同意使用
                 //修改请求结果
                 if(ampper.modifyApply(apply)>0){
-                    return true;
+                    return Msg.success("拒绝申请成功！");
                 }else{
-                    return false;
+                    return Msg.fail("拒绝申请失败！");
                 }
             }
         }
+    }
+
+
+    @Override
+    public void returnEqp(int eqp_id,int apply_id) {
+//        // 创建一个定长线程池，支持定时及周期性任务执行
+//        ScheduledExecutorService scheduledExecutorService =
+//                Executors.newScheduledThreadPool(1);
+//        // 建立一个延时任务，10秒钟之后执行
+//       scheduledExecutorService.schedule(new ReturnEqp(),10,TimeUnit.SECONDS);
+//       scheduledExecutorService.shutdown();
     }
 }

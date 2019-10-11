@@ -2,6 +2,7 @@ package cn.hxf9812.eqpmanage;
 
 
 import cn.hxf9812.eqpmanage.dao.ApplyToUseMapper;
+import cn.hxf9812.eqpmanage.dao.EqpMapper;
 import cn.hxf9812.eqpmanage.pojo.Apply;
 import cn.hxf9812.eqpmanage.server.ApplyToUseServer;
 import org.junit.Test;
@@ -11,8 +12,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,6 +29,8 @@ public class ApplyTest {
 
     @Autowired
     ApplyToUseMapper mapper;
+    @Autowired
+    EqpMapper eqpMapper;
 
     /**
      * 发送请求测试
@@ -58,7 +64,7 @@ public class ApplyTest {
     @Test
     public void testSelectForwhoapply(){
         Apply apply=new Apply();
-        apply.setWhoapply("666");
+        apply.setWhoapply("1353328145");
         List<Apply> all = aServer.getAllApplyForWhoapply(apply);
         if (all==null){
             System.out.println("集合为空");
@@ -89,5 +95,9 @@ public class ApplyTest {
                 System.out.println(apply1.getApplyedEqp());
             }
         }
+    }
+    @Test
+    public void test(){
+        aServer.returnEqp(1,8);
     }
 }

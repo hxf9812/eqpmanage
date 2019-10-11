@@ -34,5 +34,12 @@ public interface ApplyToUseServer {
      * @param apply
      * @return
      */
-    boolean setIsdealed(Apply apply);
+    Msg setIsdealed(Apply apply);
+
+    /**
+     *  延迟自动归还设备：未实现
+     * @param eqp_id
+     * @param apply_id
+     */
+    void returnEqp(int eqp_id,int apply_id);
 }

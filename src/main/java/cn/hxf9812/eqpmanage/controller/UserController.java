@@ -126,8 +126,7 @@ public class UserController {
     @RequestMapping("/register")
     @ResponseBody
     public Msg register(@RequestBody User u){
-        Msg register = server.register(u);
-        return register;
+        return server.register(u);
     }
     /**
      *
