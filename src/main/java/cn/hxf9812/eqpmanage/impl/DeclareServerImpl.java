@@ -125,7 +125,7 @@ public class DeclareServerImpl implements DeclareServer {
             //故障认证成功，把机器改成损坏
             eqp.setStatus(1);
             //更新设备信息
-            System.out.println( eqpServer.modifyEqp(eqp));
+            eqpServer.modifyEqp(eqp);
             return Msg.success("设备认证成功");
         }else{
             return Msg.fail("设备认证失败,原因可能是重复操作");
@@ -145,5 +145,10 @@ public class DeclareServerImpl implements DeclareServer {
             return Msg.fail("删除失败，原因可能是重复操作！");
 
         }
+    }
+
+    @Override
+    public Declare getDeclareById(int id) {
+        return declareMapper.getDeclareById(id);
     }
 }

@@ -90,6 +90,5 @@ public class DeclareTest {
     @Test
     public void testdelete(){
         System.out.println(declareMapper.deleteById(3));
-
     }
 }

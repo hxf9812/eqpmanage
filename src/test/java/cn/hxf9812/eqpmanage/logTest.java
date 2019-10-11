@@ -3,6 +3,7 @@ package cn.hxf9812.eqpmanage;
 
 import cn.hxf9812.eqpmanage.dao.EqpLogMapper;
 import cn.hxf9812.eqpmanage.pojo.EqpLog;
+import cn.hxf9812.eqpmanage.server.EqpLogServer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.util.Date;
 public class logTest {
     @Autowired
     EqpLogMapper eqpLogMapper;
+    @Autowired
+    EqpLogServer eqpLogServer;
     @Test
     public void testSelectAndAdd(){
         EqpLog eqpLog =new EqpLog();
@@ -25,16 +28,23 @@ public class logTest {
         eqpLog.setDamagedate(new Date());
         eqpLog.setDamagetime(1000);
         eqpLog.setIsrepaired(1);
-        System.out.println(eqpLogMapper.addEqpLog(eqpLog));
-        System.out.println(        eqpLogMapper.getAllEqpLog()
-        );
+        System.out.println(eqpLogServer.addEqpLog(eqpLog));
+        System.out.println(eqpLogServer.getAllEqpLog());
     }
     @Test
     public void testdelete(){
-        System.out.println(eqpLogMapper.deleteEqpLogById(3));
+        EqpLog eqpLog=new EqpLog();
+        eqpLog.setId(4);
+        System.out.println(eqpLogServer.deleteEqpLogById(eqpLog));
     }
     @Test
-    public void test(){
-
+    public void testupdateEqpLogDamagetimeById(){
+//        System.out.println(  eqpLogServer.updateEqpLogDamagetimeById(1));
+        System.out.println(eqpLogServer.updateRepairedById(2,1));
+    }
+    @Test
+    public void testselect(){
+        System.out.println( eqpLogMapper.getEqpLogByEqpid(3));
+        System.out.println(eqpLogServer.getEqpLogByEqpidAndTimes(0));
     }
 }

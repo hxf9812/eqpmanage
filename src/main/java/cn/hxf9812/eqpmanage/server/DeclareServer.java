@@ -34,5 +34,9 @@ public interface DeclareServer {
      *管理员删除一个用户申请
      */
     public Msg deleteDeclare(Declare declare);
+    /**
+     * 查找一个申请
+     */
+    public Declare getDeclareById(int id);
 
 }
