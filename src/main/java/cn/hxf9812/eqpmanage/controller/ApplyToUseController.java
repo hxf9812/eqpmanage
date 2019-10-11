@@ -97,4 +97,12 @@ public class ApplyToUseController {
 //        }
         return aserver.setIsdealed(apply);
     }
+
+    @RequestMapping("/deleteApplyById")
+    @ResponseBody
+    public Msg deleteApplyById(@RequestBody Apply apply){
+        if(aserver.deleteApplyById(apply.getId()))
+            return Msg.success();
+        else return Msg.fail("信息删除失败");
+    }
 }

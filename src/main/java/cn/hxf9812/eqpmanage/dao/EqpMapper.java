@@ -52,4 +52,5 @@ public interface EqpMapper {
      */
     @Select("select * from eqp where user= #{user}")
     List<Eqp> getEqpByUser(String user);
+
 }

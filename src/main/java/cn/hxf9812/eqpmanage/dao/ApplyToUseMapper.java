@@ -49,7 +49,7 @@ public interface ApplyToUseMapper {
      * @param apply
      * @return
      */
-    @Select("select * from apply where whoapplyed = #{whoapplyed}")
+    @Select("select * from apply where whoapplyed = #{whoapplyed} and isdealed = 0 ")
     @Results({
             @Result(id=true,column="id",property="id"),
             @Result(column="whoapply",property="whoapply"),
@@ -77,4 +77,10 @@ public interface ApplyToUseMapper {
      */
     @Update("update apply set isdealed = #{isdealed} where id=#{id}")
     int modifyApply(Apply apply);
+
+    /**
+     * 清除一条申请
+     */
+    @Delete("delete from apply where id= #{id}")
+    int deleteApplyById(int id);
 }

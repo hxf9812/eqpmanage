@@ -44,4 +44,9 @@ public interface EqpServer {
      * @return
      */
     List<Eqp> getEqpByUser(String user);
+
+    /**
+     * 归还设备
+     */
+    boolean returnEqp(int id);
 }
