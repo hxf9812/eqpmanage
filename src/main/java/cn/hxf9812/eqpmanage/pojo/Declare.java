@@ -1,11 +1,14 @@
 package cn.hxf9812.eqpmanage.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 
 /**
  * 维修申报请求对象
  */
+@JsonIgnoreProperties(value = {"handler"})
 public class Declare {
     /**
      * 编号

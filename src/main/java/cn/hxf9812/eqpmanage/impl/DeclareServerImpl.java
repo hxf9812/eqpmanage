@@ -1,6 +1,7 @@
 package cn.hxf9812.eqpmanage.impl;
 
 import cn.hxf9812.eqpmanage.dao.DeclareMapper;
+import cn.hxf9812.eqpmanage.dao.EqpLogMapper;
 import cn.hxf9812.eqpmanage.pojo.Declare;
 import cn.hxf9812.eqpmanage.pojo.Eqp;
 import cn.hxf9812.eqpmanage.pojo.Msg;
@@ -20,6 +21,8 @@ public class DeclareServerImpl implements DeclareServer {
     DeclareMapper declareMapper;
     @Autowired
     EqpServer eqpServer;
+    @Autowired
+    EqpLogMapper eqpLogMapper;
 
     @Override
     public List<Declare> getDeclareByDeclarant(Declare declare) {
