@@ -21,7 +21,6 @@ public interface EqpLogServer {
      * 获取所有日志信息
      */
     public Msg getAllEqpLog();
-
     /**
      * 修改机器的损坏次数
      * 无用！
@@ -34,7 +33,6 @@ public interface EqpLogServer {
     public  boolean updateRepairedById(int eqpLog_id,int isrepaired);
     /**
      * 找到某个指定id的设备的所有日志中故障次数最大的那个
-     * 无用！
      */
     public List<EqpLog> getEqpLogByEqpid(int eqpid);
     /**
