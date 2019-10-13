@@ -7,6 +7,8 @@ import cn.hxf9812.eqpmanage.pojo.Msg;
 import cn.hxf9812.eqpmanage.pojo.User;
 import cn.hxf9812.eqpmanage.server.EqpServer;
 import cn.hxf9812.eqpmanage.server.UserServer;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,19 +32,11 @@ public class EqpTest {
 
     @Test
     public void testFindAll(){
+        PageHelper.startPage(1,5);
         List<Eqp> allEqp = eqpServer.getAllEqp();
-        Msg eqpList=null;
-        if (allEqp!=null){
-             eqpList= Msg.success().add("EqpList", allEqp);
-        }else{
-              eqpList=Msg.fail().add("EqpList",null);
-        }
-        for (Eqp eqp : allEqp) {
-            System.out.println("实验室设备信息:");
-            System.out.println((List<Eqp>)eqpList.getExtend().get("EqpList"));
-            System.out.println(eqpList.getMsg());
-            System.out.println(eqpList.isFlag());
-        }
+        //        包装查询后的结果   把PageInfo交给页面   传入连续显示的页数
+        PageInfo pageInfo=new PageInfo(allEqp,5);
+        System.out.println(pageInfo);
     }
     @Test
     public void testgetEqpById(){

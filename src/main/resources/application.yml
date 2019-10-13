@@ -11,3 +11,9 @@ spring:
 logging:
     level:
       com.learnhow.springboot.mybatis.dao: debug
+#分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
