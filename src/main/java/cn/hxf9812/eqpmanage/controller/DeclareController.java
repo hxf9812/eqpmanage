@@ -7,6 +7,8 @@ import cn.hxf9812.eqpmanage.pojo.EqpLog;
 import cn.hxf9812.eqpmanage.pojo.Msg;
 import cn.hxf9812.eqpmanage.server.DeclareServer;
 import cn.hxf9812.eqpmanage.server.EqpLogServer;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,11 +41,13 @@ public class DeclareController {
     @RequestMapping("/getDeclareByDeclarant")
     @ResponseBody
     public Msg getDeclareByDeclarant(@RequestBody Declare declare){
+        PageHelper.startPage(declare.getPageNum(),10);
         List<Declare> list = server.getDeclareByDeclarant(declare);
+        PageInfo pageInfo=new PageInfo(list,5);
         if(list==null){
             return Msg.fail("集合为空");
         }else{
-            return Msg.success().add("declareList",list);
+            return Msg.success().add("declareList",pageInfo);
         }
     }
 

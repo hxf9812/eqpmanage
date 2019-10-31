@@ -1,9 +1,12 @@
 package cn.hxf9812.eqpmanage.controller;
 
 import cn.hxf9812.eqpmanage.pojo.Msg;
+import cn.hxf9812.eqpmanage.pojo.Page;
 import cn.hxf9812.eqpmanage.pojo.Result;
 import cn.hxf9812.eqpmanage.pojo.User;
 import cn.hxf9812.eqpmanage.server.UserServer;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -45,10 +48,23 @@ public class UserController {
      */
     @RequestMapping("/getAllUser")
     @ResponseBody
-    public List<User> getAllUser(){
-        if(server==null) return null;
-        List<User> list=server.getAllUser();
-        return list;
+    public Msg getAllUser(@RequestBody Page page){
+
+        PageHelper.startPage(page.getPageNum(),10);
+        List<User> list;
+        // 模糊查询
+        if(page.getMatching()==null || page.getMatching().equals("")) {
+            list = server.getAllUser();
+        }
+        else{
+            list = server.getAllUserMatching(page.getMatching());
+        }
+        PageInfo pageInfo=new PageInfo(list,5);
+        if (pageInfo!=null){
+            return Msg.success().add("eqpList",pageInfo);
+        }else{
+            return Msg.fail().add("eqpList",null);
+        }
     }
 
     /**

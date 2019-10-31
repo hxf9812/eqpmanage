@@ -15,6 +15,17 @@ public interface EqpMapper {
     @Select("select * from eqp")
     List<Eqp> getAllEqp();
 
+    @Select("select * from eqp where user is null")
+    List<Eqp> getAllEqpisFree();
+    /**
+     * 模糊查询所有设备
+     * @return
+     */
+    @Select("select * from eqp where belong like '${result}%'")
+    List<Eqp> getAllEqpMatching(String result);
+
+    @Select("select * from eqp where belong like '${result}%' and user is null")
+    List<Eqp> getAllEqpMatchingisFree(String result);
     /**
      * 根据id查询一个设备
      */

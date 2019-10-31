@@ -3,6 +3,7 @@ package cn.hxf9812.eqpmanage.controller;
 
 import cn.hxf9812.eqpmanage.pojo.Eqp;
 import cn.hxf9812.eqpmanage.pojo.Msg;
+import cn.hxf9812.eqpmanage.pojo.Page;
 import cn.hxf9812.eqpmanage.server.EqpServer;
 import cn.hxf9812.eqpmanage.server.UserServer;
 import com.github.pagehelper.PageHelper;
@@ -29,13 +30,21 @@ public class EqpController {
      */
     @RequestMapping("/getAllEqp")
     @ResponseBody
-    public Msg getAlleqp(@RequestParam(value = "pn",defaultValue = "1")Integer pn){
-        //        这个方法后面紧跟着的查询就是分页查询
-        PageHelper.startPage(pn,5);
-
-        List<Eqp> allEqp = eqpServer.getAllEqp();
-
-//        包装查询后的结果   把PageInfo交给页面   传入连续显示的页数
+    public Msg getAlleqp(@RequestBody Page page){
+        //这个方法后面紧跟着的查询就是分页查询
+        PageHelper.startPage(page.getPageNum(),10);
+        List<Eqp> allEqp;
+        if(page.getMatching()==null || page.getMatching().equals("")) {
+            if(page.getIsFree()==1){
+                allEqp=eqpServer.getAllEqpisFree();
+            }else {
+                allEqp = eqpServer.getAllEqp();
+            }
+        }
+        else{
+            allEqp = eqpServer.getAllEqpMatching(page);
+        }
+        //包装查询后的结果   把PageInfo交给页面   传入连续显示的页数
         PageInfo pageInfo=new PageInfo(allEqp,5);
         if (pageInfo!=null){
            return Msg.success().add("eqpList",pageInfo);
@@ -43,6 +52,7 @@ public class EqpController {
            return Msg.fail().add("eqpList",null);
         }
     }
+
     /**
      * 获取所有数据
      * @return

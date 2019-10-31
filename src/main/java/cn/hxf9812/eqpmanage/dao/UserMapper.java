@@ -20,7 +20,10 @@ public interface UserMapper {
     @Update("update user set password=#{password},name=#{name},phone=#{phone} where account=#{account} ")
     int modifyUserInfo(String password,String name,String phone,String account);
 
-    @Select("select * from user")
+    @Select("select * from user where name like '${value}%' ")
+    List<User> getAllUserMatching(String value);
+
+    @Select("select * from user ")
     List<User> getAllUser();
 
     @Delete("delete from user where account=#{account}")

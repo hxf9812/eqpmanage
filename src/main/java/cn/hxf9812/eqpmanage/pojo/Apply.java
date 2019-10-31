@@ -36,6 +36,16 @@ public class Apply {
      */
     private User applyedUser;
 
+    //分页属性
+    private int pageNum;
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
     /**
      *  被申请的设备
      */

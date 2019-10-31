@@ -52,6 +52,16 @@ public class Declare {
      */
     private Eqp eqp;
 
+    private int pageNum;
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
     public User getDeclarantUser() {
         return declarantUser;
     }

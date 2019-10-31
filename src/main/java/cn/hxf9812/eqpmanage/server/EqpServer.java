@@ -1,6 +1,7 @@
 package cn.hxf9812.eqpmanage.server;
 
 import cn.hxf9812.eqpmanage.pojo.Eqp;
+import cn.hxf9812.eqpmanage.pojo.Page;
 import cn.hxf9812.eqpmanage.pojo.User;
 import org.apache.ibatis.annotations.Delete;
 
@@ -15,6 +16,11 @@ public interface EqpServer {
      * @return List<Eqp>
      */
     List<Eqp> getAllEqp();
+    List<Eqp> getAllEqpisFree();
+    /**
+     * 模糊查询所有
+     */
+    List<Eqp> getAllEqpMatching(Page page);
     /**
      * 修改一个设备根据id
      */

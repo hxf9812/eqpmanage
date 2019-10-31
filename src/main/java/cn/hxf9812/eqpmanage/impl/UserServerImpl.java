@@ -24,6 +24,12 @@ public class UserServerImpl implements UserServer {
     }
 
     @Override
+    public List<User> getAllUserMatching(String matching) {
+        List<User> list = mapper.getAllUserMatching(matching);
+        return list;
+    }
+
+    @Override
     public List<User> getAllUser() {
         if(mapper==null) return null;
 

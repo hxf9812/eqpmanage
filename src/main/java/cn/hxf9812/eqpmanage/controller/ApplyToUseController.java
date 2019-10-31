@@ -2,8 +2,11 @@ package cn.hxf9812.eqpmanage.controller;
 
 import cn.hxf9812.eqpmanage.pojo.Apply;
 import cn.hxf9812.eqpmanage.pojo.Msg;
+import cn.hxf9812.eqpmanage.pojo.Page;
 import cn.hxf9812.eqpmanage.pojo.User;
 import cn.hxf9812.eqpmanage.server.ApplyToUseServer;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -41,23 +44,14 @@ public class ApplyToUseController {
     @RequestMapping("/getAllApplyByWhoApply")
     @ResponseBody
     public Msg getAllApplyByWhoApply(@RequestBody Apply apply, HttpSession session){
-        /*
-         * 需要申请者账号whoapply:Apply whoapply参数
-         */
-        /**
-         * 获取用户帐号
-         */
-//        User user = (User)session.getAttribute("user");
-        //设置账号
-//        apply.setWhoapply(user.getAccount());
-        //通过前端获取用户账号，并传递过来
-
-        //查询
+        //分页
+        PageHelper.startPage(apply.getPageNum(),10);
         List<Apply> list = aserver.getAllApplyForWhoapply(apply);
+        PageInfo pageInfo=new PageInfo(list,5);
         if(list==null){
             return Msg.fail().add("ApplysByUser",null);
         }else{
-            return  Msg.success().add("ApplysByUser",list);
+            return  Msg.success().add("ApplysByUser",pageInfo);
         }
     }
     @RequestMapping("/getAllApplyByWhoApplyed")
@@ -66,18 +60,13 @@ public class ApplyToUseController {
         /*
         * 需要被申请者账号:Apply whoapplyed参数
         * */
-        /**
-         * 获取管理员帐号
-         */
-//        User user = (User)session.getAttribute("user");
-        //设置账号
-//        apply.setWhoapplyed(user.getAccount());
-        //查询
+        PageHelper.startPage(apply.getPageNum(),10);
         List<Apply> list = aserver.getAllApplyForWhoapplyed(apply);
+        PageInfo pageInfo=new PageInfo(list,5);
         if(list==null){
             return Msg.fail().add("ApplysByMaster",null);
         }else{
-            return  Msg.success().add("ApplysByMaster",list);
+            return  Msg.success().add("ApplysByMaster",pageInfo);
         }
     }
 

@@ -2,12 +2,14 @@ package cn.hxf9812.eqpmanage.impl;
 
 import cn.hxf9812.eqpmanage.dao.EqpMapper;
 import cn.hxf9812.eqpmanage.pojo.Eqp;
+import cn.hxf9812.eqpmanage.pojo.Page;
 import cn.hxf9812.eqpmanage.pojo.User;
 import cn.hxf9812.eqpmanage.server.EqpServer;
 import cn.hxf9812.eqpmanage.server.UserServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("all")
@@ -45,7 +47,54 @@ public class EqpServerImpl implements EqpServer {
         }
         return allEqp;
     }
+    @Override
+    public List<Eqp> getAllEqpisFree() {
+        List<Eqp> allEqp=null;
+        //获取设备集合
+        try{
+            allEqp = mapper.getAllEqpisFree();
+        }catch (Exception e){
+            return null;
+        }
+        //遍历集合设置user对象null
+        for (Eqp eqp : allEqp) {
+            User master = userServer.getUserByAccount(eqp.getMaster());
+            eqp.setMasterUser(master);
+            //status为1表示正在被使用，则查询被使用者
+            if (eqp.getUser()!=null){
+                User user=userServer.getUserByAccount(eqp.getUser());
+                eqp.setUserUser(user);
+            }
+        }
 
+        return allEqp;
+    }
+
+    @Override
+    public List<Eqp> getAllEqpMatching(Page page) {
+        List<Eqp> allEqp=null;
+        try{
+            if(page.getIsFree()==1){
+                allEqp = mapper.getAllEqpMatchingisFree(page.getMatching());
+            }else {
+                allEqp = mapper.getAllEqpMatching(page.getMatching());
+            }
+        }catch (Exception e){
+            return null;
+        }
+        //遍历集合设置user对象null
+        for (Eqp eqp : allEqp) {
+            User master = userServer.getUserByAccount(eqp.getMaster());
+            eqp.setMasterUser(master);
+            //status为1表示正在被使用，则查询被使用者
+            if (eqp.getUser()!=null){
+                User user=userServer.getUserByAccount(eqp.getUser());
+                eqp.setUserUser(user);
+            }
+        }
+
+        return allEqp;
+}
     /**
      * 修改设备
      * @param eqp

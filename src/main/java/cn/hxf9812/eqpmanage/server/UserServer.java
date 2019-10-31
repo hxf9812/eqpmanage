@@ -11,6 +11,7 @@ public interface  UserServer {
    User getUserByAccount(String account);
    boolean modifyUserInfo(String password,String name,String phone,String account);
    List<User> getAllUser();
+   List<User> getAllUserMatching(String matching);
    boolean deleteaUser(String account);
    boolean addaUser(String account,String password,int rank,String name,String phone);
    boolean modifyaUser(String password,String name,String phone,int userrank,String account);

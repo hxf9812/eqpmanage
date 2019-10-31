@@ -47,12 +47,6 @@ public class DeclareServerImpl implements DeclareServer {
         ||declare.getContent()==null){
             return Msg.fail("有必须的参数为空！");
         }
-        //查询申请维修的设备是否已经被其他人申请
-        Declare declareByEqpid = declareMapper.getDeclareByEqpid(declare.getEqpid());
-        if(declareByEqpid!=null){
-            //已经被人申请
-            return Msg.fail("您所申请维修的设备已经被其他人申请");
-        }
         //根据id查找是设备是否存在
         Eqp eqp = eqpServer.getEqpById(declare.getEqpid());
         if(eqp==null){
